@@ -13,12 +13,22 @@ function CubeSide({ side, onChangeBg }) {
     onChangeBg(side.id, imageUrl)
   }
 
+const removeBG = (event) => {
+    event.stopPropagation()
+    onChangeBg(side.id, null)
+  }
+
   return (
       <div
       className="cube-side"
       style={{ backgroundImage: side.bgUrl ? `url(${side.bgUrl})` : 'none' }}
     >
       <button onClick={() => fileInputRef.current.click()}>+</button>
+      {side.bgUrl && (
+        <button className="delete-btn" onClick={removeBG}>
+          x
+        </button>
+      )}
       <input
         type="file"
         accept="image/*"
